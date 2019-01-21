@@ -25,6 +25,7 @@ public class ShowProductByPage extends HttpServlet {
         //返回 的数据使用JavaBean封装
         PageResult<Product> pageResult= productService.findBooks(category,page);
         request.setAttribute("pageResult",pageResult);
+        request.setAttribute("category",category);
 
         request.getRequestDispatcher("/product_list.jsp").forward(request,response);
 
