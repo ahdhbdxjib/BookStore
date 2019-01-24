@@ -2,69 +2,69 @@
 1前奏
 开发文档介绍
 系统环境 
-Eclipse Neno + JDK1.8 + Tomcat8.5 + MySQL5.7
-Eclipse Neno + JDK1.7 + Tomcat7.0 + MySQL5.7
+	Eclipse Neno + JDK1.8 + Tomcat8.5 + MySQL5.7
+	Eclipse Neno + JDK1.7 + Tomcat7.0 + MySQL5.7
 
 数据库表创建
-create database bookStore;
-use bookStore;
-#用户表
-CREATE TABLE `user` (
-  `id` INT(11) AUTO_INCREMENT,
-  `username` VARCHAR(20) ,
-  `PASSWORD` VARCHAR(20) ,
-  `gender` VARCHAR(10) ,
-  `email` VARCHAR(50) ,
-  `telephone` VARCHAR(20) ,
-  `introduce` VARCHAR(100),
-  `activeCode` VARCHAR(50) ,
-  `state` INT(11) ,
-  `role` VARCHAR(10) DEFAULT '普通用户',
-  `registTime` TIMESTAMP ,
-  PRIMARY KEY (`id`)
-);
+	create database bookStore;
+	use bookStore;
+	#用户表
+	CREATE TABLE `user` (
+	  `id` INT(11) AUTO_INCREMENT,
+	  `username` VARCHAR(20) ,
+	  `PASSWORD` VARCHAR(20) ,
+	  `gender` VARCHAR(10) ,
+	  `email` VARCHAR(50) ,
+	  `telephone` VARCHAR(20) ,
+	  `introduce` VARCHAR(100),
+	  `activeCode` VARCHAR(50) ,
+	  `state` INT(11) ,
+	  `role` VARCHAR(10) DEFAULT '普通用户',
+	  `registTime` TIMESTAMP ,
+	  PRIMARY KEY (`id`)
+	);
 
 #商品表
-CREATE TABLE `products` (
-  `id` VARCHAR(100) ,
-  `name` VARCHAR(40) ,
-  `price` DOUBLE ,
-  `category` VARCHAR(40) ,
-  `pnum` INT(11) ,
-  `imgurl` VARCHAR(100) ,
-  `description` VARCHAR(255) ,
-  PRIMARY KEY (`id`)
-);
+	CREATE TABLE `products` (
+	  `id` VARCHAR(100) ,
+	  `name` VARCHAR(40) ,
+	  `price` DOUBLE ,
+	  `category` VARCHAR(40) ,
+	  `pnum` INT(11) ,
+	  `imgurl` VARCHAR(100) ,
+	  `description` VARCHAR(255) ,
+	  PRIMARY KEY (`id`)
+	);
 #订单表
-CREATE TABLE `orders` (
-  `id` VARCHAR(100) ,
-  `money` DOUBLE ,
-  `receiverAddress` VARCHAR(255) ,
-  `receiverName` VARCHAR(20) ,
-  `receiverPhone` VARCHAR(20) ,
-  `paystate` INT(11) ,
-  `ordertime` TIMESTAMP ,
-  `user_id` INT(11) ,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-);
+	CREATE TABLE `orders` (
+	  `id` VARCHAR(100) ,
+	  `money` DOUBLE ,
+	  `receiverAddress` VARCHAR(255) ,
+	  `receiverName` VARCHAR(20) ,
+	  `receiverPhone` VARCHAR(20) ,
+	  `paystate` INT(11) ,
+	  `ordertime` TIMESTAMP ,
+	  `user_id` INT(11) ,
+	  PRIMARY KEY (`id`),
+	  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+	);
 
 #订单详情表
-CREATE TABLE `orderitem` (
-  `order_id` VARCHAR(100) ,
-  `product_id` VARCHAR(100),
-  `buynum` INT(11) ,
-  PRIMARY KEY (`order_id`,`product_id`),
-  FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-);
+	CREATE TABLE `orderitem` (
+	  `order_id` VARCHAR(100) ,
+	  `product_id` VARCHAR(100),
+	  `buynum` INT(11) ,
+	  PRIMARY KEY (`order_id`,`product_id`),
+	  FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+	  FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+	);
 
 
 包的划分
-	按照JavaEE 三层结构
-	Java EE（Java Platform，Enterprise Edition）是sun公司（2009年4月20日甲骨文将其收购）推出的企业级应用程序版本。这个版本以前称为 J2EE。
-	模型：domain,model,pojo,po,entity
- 
+		按照JavaEE 三层结构
+		Java EE（Java Platform，Enterprise Edition）是sun公司（2009年4月20日甲骨文将其收购）推出的企业级应用程序版本。这个版本以前称为 J2EE。
+		模型：domain,model,pojo,po,entity
+
 
 jar包的导入
 导入mysql驱动 
