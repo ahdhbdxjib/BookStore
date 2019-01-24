@@ -7,6 +7,8 @@ import com.bookstore.model.Product;
 import java.sql.SQLException;
 import java.util.List;
 
+import static com.bookstore.dao.ProductDao.*;
+
 public class ProductService {
     ProductDao productDao = new ProductDao();
 
@@ -30,8 +32,15 @@ public class ProductService {
             e.printStackTrace();
             return null;
         }
+    }
 
-
+    public Product findBook(String id){
+        try {
+            return  ProductDao.findProduct(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

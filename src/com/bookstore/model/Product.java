@@ -1,5 +1,7 @@
 package com.bookstore.model;
 
+import java.util.Objects;
+
 public class Product {
     private int id;
     private String name;//书名
@@ -8,6 +10,25 @@ public class Product {
     private int pnum;//数量
     private String imgurl;//图片
     private String description;//描述
+
+    /**
+     * 只用对比id即可
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {

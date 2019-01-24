@@ -42,13 +42,13 @@
 
                                             <div class="divbookpic">
                                                 <p>
-                                                    <a href="product_info.jsp"><img src="${pageContext.request.contextPath}${procucts.imgurl}" width="115"
+                                                    <a href=${pageContext.request.contextPath}/productInfo?id=${procucts.id}><img src="${pageContext.request.contextPath}${procucts.imgurl}" width="115"
                                                                                     height="129" border="0"/> </a>
                                                 </p>
                                             </div>
 
                                             <div class="divlisttitle">
-                                                <a href="product_info.jsp">书名:${procucts.name}<br/>售价:xxx </a>
+                                                <a href=${pageContext.request.contextPath}/productInfo?id=${procucts.id}>书名:${procucts.name}<br/>售价:xxx </a>
                                             </div>
                                         </td>
 

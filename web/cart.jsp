@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -44,28 +45,31 @@
 													<td width="10%">小计</td>
 													<td width="10%">取消</td>
 												</tr>
-											</table> 
+											</table>
 												<table width="100%" border="0" cellspacing="0">
-													<tr>
-														<td width="10%">1</td>
-														<td width="30%">Thinking in Java</td>
+													<c:forEach var="p">
+														<tr>
+															<td width="10%">1</td>
+															<td width="30%">Thinking in Java</td>
 
-														<td width="10%">100</td>
-														<td width="20%">
-														<input type="button" value='-'
-															style="width:20px">
+															<td width="10%">100</td>
+															<td width="20%">
+																<input type="button" value='-'
+																	   style="width:20px">
 
-															<input name="text" type="text"  value=10
-															style="width:40px;text-align:center" /> <input
-															type="button" value='+' style="width:20px">
+																<input name="text" type="text"  value=10
+																	   style="width:40px;text-align:center" /> <input
+																	type="button" value='+' style="width:20px">
 
-														</td>
-														<td width="10%">10</td>
-														<td width="10%">1000</td>
+															</td>
+															<td width="10%">10</td>
+															<td width="10%">1000</td>
 
-														<td width="10%"><a href="#"
-															style="color:#FF0000; font-weight:bold">X</a></td>
-													</tr>
+															<td width="10%"><a href="#"
+																			   style="color:#FF0000; font-weight:bold">X</a></td>
+														</tr>
+													</c:forEach>
+
 												</table>
 												
 
