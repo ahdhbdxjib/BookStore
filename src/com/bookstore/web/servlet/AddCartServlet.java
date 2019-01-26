@@ -41,7 +41,12 @@ public class AddCartServlet extends HttpServlet {
             }
             req.getSession().setAttribute("cart",cart);
         }
-        req.getRequestDispatcher("/cart.jsp").forward(req,resp);
+        //用户选择继续购物还是就算购物车
+        String a1= "<a href=\""+req.getContextPath()+"/showProductByPage?category=计算机"+"\">继续购物</a>";
+        String a2= "&nbsp&nbsp&nbsp<a href=\""+req.getContextPath()+"/cart.jsp\">进入购物车</a>";
+        resp.getWriter().write(a1);
+        resp.getWriter().write(a2);
+        //req.getRequestDispatcher("/cart.jsp").forward(req,resp);
         //遍历cart
         for (Map.Entry<Product,Integer> productIntegerEntry : cart.entrySet()){
             System.out.println(productIntegerEntry);

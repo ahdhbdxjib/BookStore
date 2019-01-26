@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -6,7 +7,30 @@
 <head>
 <title>电子书城</title>
 <link rel="stylesheet" href="css/main.css" type="text/css" />
+	<script type="text/javascript">
+        // id 商品的id
+        // num 商品的数量
+        //pnum 商品的库存
+        function changeNum(id,num,pnum) {
+			// alert(id+"-"+num+"-"+pnum);
+			if (num > pnum){
+			    alert("购买数量不能超过库存量！")
+				return;
+			}
+			if(num <= 0){
+			    var com =  confirm("你要将商品从购物车中一出吗？")
+				if(com == false){
+			        return;
+				}
+			}
+			//调用servlet修改session的数据
+            location.href = "${pageContext.request.contextPath}/changeNum?id="+id+"&num="+num;
 
+        }
+
+
+
+	</script>
 
 </head>
 
@@ -47,27 +71,32 @@
 												</tr>
 											</table>
 												<table width="100%" border="0" cellspacing="0">
-													<c:forEach var="p">
+													<%--设置一个循环之外的变量用于存储总价--%>
+													<s:set var="totalPrice" value="0"></s:set>
+													<%--varStatus获取数据的当前的所在的位置从1开始--%>
+													<c:forEach items="${cart}" var="entry" varStatus="status">
+
 														<tr>
-															<td width="10%">1</td>
-															<td width="30%">Thinking in Java</td>
+															<td width="10%">${status.count}</td>
+															<td width="30%">${entry.key.name}</td>
 
-															<td width="10%">100</td>
+															<td width="10%">${entry.key.price}</td>
 															<td width="20%">
-																<input type="button" value='-'
-																	   style="width:20px">
+																<input type="button" value='-' style="width:20px" onclick="changeNum(${entry.key.id},${entry.value - 1},${entry.key.pnum})">
 
-																<input name="text" type="text"  value=10
-																	   style="width:40px;text-align:center" /> <input
-																	type="button" value='+' style="width:20px">
+																<input name="text" type="text"  value=${entry.value}
+																	   style="width:40px;text-align:center" />
+																<input type="button" value='+' style="width:20px" onclick="changeNum(${entry.key.id},${entry.value + 1},${entry.key.pnum})">
 
 															</td>
-															<td width="10%">10</td>
-															<td width="10%">1000</td>
+															<td width="10%">${entry.key.pnum}</td>
+															<td width="10%">${entry.key.price*entry.value}</td>
 
 															<td width="10%"><a href="#"
 																			   style="color:#FF0000; font-weight:bold">X</a></td>
 														</tr>
+
+														<c:set var="totalPrice" value="${totalPrice + entry.key.price*entry.value}"></c:set>
 													</c:forEach>
 
 												</table>
@@ -77,7 +106,7 @@
 											<table cellspacing="1" class="carttable">
 												<tr>
 													<td style="text-align:right; padding-right:40px;"><font
-														style="color:#FF6600; font-weight:bold">合计：&nbsp;&nbsp;xx元</font>
+														style="color:#FF6600; font-weight:bold">合计：&nbsp;&nbsp;${totalPrice}元</font>
 													</td>
 												</tr>
 											</table>
