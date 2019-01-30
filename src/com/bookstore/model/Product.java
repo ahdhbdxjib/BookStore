@@ -1,8 +1,9 @@
 package com.bookstore.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private int id;
     private String name;//书名
     private double price;//价格

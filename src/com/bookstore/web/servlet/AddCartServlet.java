@@ -48,9 +48,9 @@ public class AddCartServlet extends HttpServlet {
         resp.getWriter().write(a2);
         //req.getRequestDispatcher("/cart.jsp").forward(req,resp);
         //遍历cart
-        for (Map.Entry<Product,Integer> productIntegerEntry : cart.entrySet()){
+       /* for (Map.Entry<Product,Integer> productIntegerEntry : cart.entrySet()){
             System.out.println(productIntegerEntry);
-        }
+        }*/
     }
 
 }
